@@ -10,7 +10,12 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "artist")
+@Builder
 public class Artist {
 
     Long artistId;
