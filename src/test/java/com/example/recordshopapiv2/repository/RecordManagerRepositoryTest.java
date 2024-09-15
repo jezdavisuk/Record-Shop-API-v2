@@ -17,4 +17,15 @@ public class RecordManagerRepositoryTest {
 
     @Autowired
     RecordManagerRepository recordManagerRepository;
+
+    @Test
+    @DisplayName("Creation and retrieval of instances of class Album to H2 in-memory database.")
+    public void testGetAllAlbums() {
+        // Arrange
+
+        // Act
+
+        // Assert
+
+    }
 }
