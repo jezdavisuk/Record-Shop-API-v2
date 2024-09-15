@@ -33,4 +33,14 @@ public class Price {
     @Column(name="market_price", nullable = false)
     BigDecimal marketPrice;
 
+    @JsonIgnore
+    @Column(name="profit_margin")
+    BigDecimal profitMargin = getProfitMargin();
+
+    @JsonIgnore
+    BigDecimal getProfitMargin() {
+        assert wholesalePrice != null;
+        return wholesalePrice.subtract(marketPrice);
+    }
+
 }
