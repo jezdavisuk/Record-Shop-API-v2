@@ -10,6 +10,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "stock")
+@Builder
 public class Stock {
 
     Long stockId;
