@@ -17,12 +17,20 @@ import java.math.BigDecimal;
 @Builder
 public class Price {
 
+    @Id
+    @Column(name="stock_id")
     Long id;
 
+    // relationship three
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "stock_id")
     Stock stock;
 
+    @Column(name="wholesale_price", nullable = false)
     BigDecimal wholesalePrice;
 
+    @Column(name="market_price", nullable = false)
     BigDecimal marketPrice;
 
 }
