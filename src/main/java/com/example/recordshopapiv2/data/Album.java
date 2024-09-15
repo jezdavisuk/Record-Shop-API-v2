@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,10 +39,10 @@ public class Album {
 
     @Column(name = "release_date")
     @DateTimeFormat
-    LocalDateTime releaseDate;
+    LocalDate releaseDate;
 
     @Column(name = "age_restriction")
-    int ageRestriction;
+    boolean ageRestricted;
 
     // relationship two
     @JsonIgnore
