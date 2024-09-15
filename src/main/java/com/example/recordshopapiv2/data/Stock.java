@@ -25,7 +25,7 @@ public class Stock {
 
     // relationship two
     @ManyToOne
-    @JoinColumn(name = "album_id", referencedColumnName = "listings_in_stock", nullable = false)
+    @JoinColumn(name = "album_id", nullable = false)
     Album album;
 
     @Column(name="format", updatable = false, nullable = false)
@@ -45,7 +45,8 @@ public class Stock {
 
     // relationship four
     @JsonIgnore
-    @ManyToMany    @JoinTable(
+    @ManyToMany
+    @JoinTable(
             name = "signature_stock",
             joinColumns = @JoinColumn(name = "stock_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id")

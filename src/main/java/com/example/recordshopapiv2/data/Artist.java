@@ -28,7 +28,7 @@ public class Artist {
 
     // relationship one
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist")
     @Column(name = "album_id")
     Set<Album> albums = new HashSet<>();
 

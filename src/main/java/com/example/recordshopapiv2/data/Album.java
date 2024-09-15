@@ -30,7 +30,7 @@ public class Album {
 
     // relationship one
     @ManyToOne
-    @JoinColumn(name = "artist_id", referencedColumnName = "album_id", nullable = false)
+    @JoinColumn(name = "artist_id", nullable = false)
     Artist artist;
 
     @Column(name = "genre")
@@ -46,7 +46,7 @@ public class Album {
 
     // relationship two
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "album_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "album")
     @Column(name = "listings_in_stock")
     Set<Stock> listingsInStock = new HashSet<>();
 }
