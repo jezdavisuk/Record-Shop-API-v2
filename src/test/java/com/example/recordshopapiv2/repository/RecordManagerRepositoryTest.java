@@ -39,6 +39,8 @@ public class RecordManagerRepositoryTest {
                 LocalDate.of(1970, Month.SEPTEMBER, 14), false, null));
 
         // Act
+        recordManagerRepository.saveAll(expectedList);
+        Iterable<Album> albums = recordManagerRepository.findAll();
 
         // Assert
 
