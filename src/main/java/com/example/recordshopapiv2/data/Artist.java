@@ -18,11 +18,22 @@ import java.util.Set;
 @Builder
 public class Artist {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "artist_id", updatable = false, nullable = false)
     Long artistId;
 
+    @Column(name = "artist_name")
     String artistName;
 
+    // relationship one
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist_id")
+    @Column(name = "album_id")
     Set<Album> albums = new HashSet<>();
 
+    // relationship four
+    @JsonIgnore
+    @ManyToMany(mappedBy = "signedBy")
     Set<Stock> signedCopies = new HashSet<>();
 }
