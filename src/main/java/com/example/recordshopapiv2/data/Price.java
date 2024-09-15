@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "price")
+@Builder
 public class Price {
 
     Long id;
