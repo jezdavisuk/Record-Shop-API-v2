@@ -43,6 +43,8 @@ public class RecordManagerRepositoryTest {
         Iterable<Album> albums = recordManagerRepository.findAll();
 
         // Assert
+        assertThat(albums).hasSize(3);
+        assertThat(expectedList).isEqualTo(albums);
 
     }
 }
