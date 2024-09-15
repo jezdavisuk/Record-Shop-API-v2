@@ -20,17 +20,33 @@ import java.util.Set;
 @Builder
 public class Album {
 
+    @Id
+    @GeneratedValue
+    @Column(name ="album_id", updatable = false, nullable = false)
     Long albumId;
 
+    @Column(name = "album_name", nullable = false)
     String albumName;
 
+    // relationship one
+    @ManyToOne
+    @JoinColumn(name = "artist_id", referencedColumnName = "album_id", nullable = false)
     Artist artist;
 
+    @Column(name = "genre")
+    @Enumerated(EnumType.STRING)
     Genre genre;
 
+    @Column(name = "release_date")
+    @DateTimeFormat
     LocalDateTime releaseDate;
 
+    @Column(name = "age_restriction")
     int ageRestriction;
 
+    // relationship two
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "album_id")
+    @Column(name = "listings_in_stock")
     Set<Stock> listingsInStock = new HashSet<>();
 }
