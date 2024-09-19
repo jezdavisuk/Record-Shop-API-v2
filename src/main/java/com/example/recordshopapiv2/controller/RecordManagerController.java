@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/records")
+@RequestMapping("/api/v1/records/")
 public class RecordManagerController {
 
     @Autowired
     RecordManagerService recordManagerService;
 
-    @GetMapping("/all-albums")
+    @GetMapping("all-albums")
     public ResponseEntity<List<Album>> getAllAlbums() {
+
         return new ResponseEntity<>(recordManagerService.getAllAlbums(), HttpStatus.OK);
     }
 

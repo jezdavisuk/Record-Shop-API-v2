@@ -16,8 +16,10 @@ public class RecordManagerServiceImpl implements RecordManagerService {
 
     @Override
     public List<Album> getAllAlbums() {
+
         List<Album> albums = new ArrayList<>();
         recordManagerRepository.findAll().forEach(albums::add);
         return albums;
+
     }
 }

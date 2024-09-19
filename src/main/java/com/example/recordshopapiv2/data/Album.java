@@ -1,5 +1,6 @@
 package com.example.recordshopapiv2.data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class Album {
     Genre genre;
 
     @Column(name = "release_date")
-    @DateTimeFormat
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     LocalDate releaseDate;
 
     @Column(name = "age_restricted")
