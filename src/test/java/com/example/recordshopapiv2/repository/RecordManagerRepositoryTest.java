@@ -1,8 +1,6 @@
 package com.example.recordshopapiv2.repository;
 
-import com.example.recordshopapiv2.data.Album;
-import com.example.recordshopapiv2.data.Artist;
-import com.example.recordshopapiv2.data.Genre;
+import com.example.recordshopapiv2.data.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,27 +22,27 @@ public class RecordManagerRepositoryTest {
     @Test
     @DisplayName("Creation and retrieval of instances of class Album to H2 in-memory database.")
     public void testGetAllAlbums() {
-
         // Arrange
-        Artist artist1 = new Artist(1L, "Foals", null, null);
-        Artist artist2 = new Artist(2L, "Disclosure", null, null);
-        Artist artist3 = new Artist(3L, "Curtis Mayfield", null, null);
+        Album album1 = new Album(1L, "Total Life Forever", Genre.INDIE,
+            LocalDate.of(2010, Month.MAY, 10), false, null, null);
+        Album album2 = new Album(2L, "Total Life Forever", Genre.INDIE,
+                LocalDate.of(2010, Month.MAY, 10), false, null, null);
+        Album album3 = new Album(3L, "Total Life Forever", Genre.INDIE,
+                LocalDate.of(2010, Month.MAY, 10), false, null, null);
 
-        List<Album> expectedList = new ArrayList<>();
-        expectedList.add(new Album(1L, "Total Life Forever", artist1, Genre.INDIE,
-                LocalDate.of(2010, Month.MAY, 10), false, null));
-        expectedList.add(new Album(2L, "Settle", artist2, Genre.HOUSE,
-                LocalDate.of(2013, Month.JUNE, 3), false, null));
-        expectedList.add(new Album(3L, "Curtis", artist3, Genre.SOUL,
-                LocalDate.of(1970, Month.SEPTEMBER, 14), false, null));
+        List<Album> expectedAlbumList = new ArrayList<>();
+        expectedAlbumList.add(album1);
+        expectedAlbumList.add(album2);
+        expectedAlbumList.add(album3);
 
         // Act
-        recordManagerRepository.saveAll(expectedList);
-        Iterable<Album> albums = recordManagerRepository.findAll();
+        recordManagerRepository.saveAll(expectedAlbumList);
+        Iterable<Album> actualAlbumList = recordManagerRepository.findAll();
 
         // Assert
-        assertThat(albums).hasSize(3);
-        assertThat(expectedList).isEqualTo(albums);
+        assertThat(actualAlbumList).hasSize(3);
+        assertThat(expectedAlbumList).isEqualTo(actualAlbumList);
 
     }
+
 }
