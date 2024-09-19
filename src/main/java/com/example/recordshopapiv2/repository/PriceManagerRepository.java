@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PriceManagerRepository extends CrudRepository<Price, Long> {
+
 }
