@@ -12,7 +12,7 @@
 	<artifactId>recordshopapiv2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Record Shop API (v2)</name>
-	<description>Containerised and deployable API modelling an inventory system for vinyl records</description>
+	<description>Containerised and deployable API modelling an inventory system for vinyl records.</description>
 	<url/>
 	<licenses>
 		<license/>
