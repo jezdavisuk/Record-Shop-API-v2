@@ -18,29 +18,27 @@ import java.math.BigDecimal;
 public class Price {
 
     @Id
-    @Column(name="stock_id")
-    Long id;
+    @Column(name = "price_id")
+    Long priceId;
 
-    // relationship three
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "stock_id")
-    Stock stock;
-
-    @Column(name="wholesale_price", nullable = false)
+    @Column(name="wholesale_price")
     BigDecimal wholesalePrice;
 
-    @Column(name="market_price", nullable = false)
+    @Column(name="market_price")
     BigDecimal marketPrice;
 
     @JsonIgnore
-    @Column(name="profit_margin")
-    BigDecimal profitMargin = getProfitMargin();
+    @OneToOne(cascade = CascadeType.ALL, optional = true)
+    @PrimaryKeyJoinColumn(name = "stock", referencedColumnName = "stock_id")
+    private Stock stock;
 
-    @JsonIgnore
-    BigDecimal getProfitMargin() {
-        assert wholesalePrice != null;
-        return wholesalePrice.subtract(marketPrice);
-    }
-
+//    @JsonIgnore
+//    @Column(name="profit_margin")
+//    BigDecimal profitMargin = getProfitMargin();
+//
+//    @JsonIgnore
+//    BigDecimal getProfitMargin() {
+//        assert wholesalePrice != null;
+//        return wholesalePrice.subtract(marketPrice);
+//    }
 }

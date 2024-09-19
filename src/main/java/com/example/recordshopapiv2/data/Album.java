@@ -28,12 +28,7 @@ public class Album {
     @Column(name = "album_name", nullable = false)
     String albumName;
 
-    // relationship one
-    @ManyToOne
-    @JoinColumn(name = "artist_id", nullable = false)
-    Artist artist;
-
-    @Column(name = "genre")
+    @Column(name = "genre", nullable = false)
     @Enumerated(EnumType.STRING)
     Genre genre;
 
@@ -41,12 +36,16 @@ public class Album {
     @DateTimeFormat
     LocalDate releaseDate;
 
-    @Column(name = "age_restriction")
+    @Column(name = "age_restricted")
     boolean ageRestricted;
 
-    // relationship two
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "album")
-    @Column(name = "listings_in_stock")
-    Set<Stock> listingsInStock = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id")
+    Artist artist;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "stockId")
+    Set<Stock> stock = new HashSet<>();
+
 }

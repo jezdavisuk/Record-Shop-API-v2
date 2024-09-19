@@ -6,9 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Set;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+
+
 
 @Entity
 @Data
@@ -20,34 +22,28 @@ public class Stock {
 
     @Id
     @GeneratedValue
-    @Column(name="stock_id", updatable = false, nullable = false)
+    @Column(name="stock_id")
     Long stockId;
 
-    // relationship two
-    @ManyToOne
-    @JoinColumn(name = "album_id", nullable = false)
-    Album album;
-
-    @Column(name="format", updatable = false, nullable = false)
+    @Column(name="format")
     @Enumerated(EnumType.STRING)
     Medium medium;
 
     @Column(name="quantity_in_stock")
-    int stockCount;
-
-    // relationship three
-    @OneToOne(mappedBy = "stock", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name="retail_price_in_pence")
-    Price retailPrice;
+    int quantityInStock;
 
     @Column(name="last_modified")
     LocalDateTime lastModified;
 
-    // relationship four
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id")
+    Artist artist;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "signature_stock",
+            name = "stock_id_to_artist_id",
             joinColumns = @JoinColumn(name = "stock_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id")
     )
