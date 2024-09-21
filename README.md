@@ -1,5 +1,7 @@
 ## Record Shop Inventory Management System
 
+## Introduction
+
 The Record Shop Inventory Management System provides a system for tracking, creating, and updating stock items for a fictional retailer TrackDaw, a vendor of records and various other assorted paraphernalia
 within the world of music young and old. In its current state, it provides TrackDaw employees a sleek user-friendly interface for querying company stock levels. This repository is a revision on an earlier
 iteration with a renewed focus towards making frequent and clean git commits, and a strict adherence to the principles of Test-Driven Development. It also constitutes a radical overhaul of the models to keep 
