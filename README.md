@@ -1,6 +1,6 @@
-## Record Shop Inventory Management System
+# Record Shop Inventory Management System
 
-## Introduction
+### Introduction
 
 The Record Shop Inventory Management System provides a system for tracking, creating, and updating stock items for a fictional retailer TrackDaw, a vendor of records and various other assorted paraphernalia
 within the world of music young and old. In its current state, it provides TrackDaw employees a sleek user-friendly interface for querying company stock levels. This repository is a revision on an earlier
@@ -12,6 +12,6 @@ This is a Spring Boot RESTful API and, in its current form, it handles HTTP requ
 It follows an MVC (Model-View-Controller) architectural pattern emphasising a modular design with separation of concerns by layer. This confers advantages in ease-of-maintainance and scalability.
 
 
-## Future Considerations
+### Future Considerations
 
 New types of stock item
