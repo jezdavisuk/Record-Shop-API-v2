@@ -1,4 +1,4 @@
-# Record Shop Inventory Management System
+## Record Shop Inventory Management System
 
 ### Introduction
 
