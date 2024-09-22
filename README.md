@@ -11,7 +11,7 @@ data class and its closely-related fields. This not only reduces service layer b
 This is a Spring Boot RESTful API and, in its current form, it handles HTTP requests to perform CRUD operations on a PostgreSQL database instance. It persists data of class Stock, Album, Artist, and Price. 
 It follows an MVC (Model-View-Controller) architectural pattern emphasising a modular design with separation of concerns by layer. This confers advantages in ease-of-maintainance and scalability.
 
-
+![TrackDaw-v1](https://github.com/user-attachments/assets/525a4ab8-2f2d-4c0d-b0c5-24109d7510c7)
 
 ### Future Considerations
 
