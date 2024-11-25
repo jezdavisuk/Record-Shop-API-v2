@@ -1,8 +1,8 @@
-package com.example.recordshopapiv2.service;
+package com.jduk.api.service;
 
-import com.example.recordshopapiv2.data.Album;
-import com.example.recordshopapiv2.data.Genre;
-import com.example.recordshopapiv2.repository.RecordManagerRepository;
+import com.jduk.api.data.Album;
+import com.jduk.api.data.Genre;
+import com.jduk.api.repository.ApiRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,10 +21,10 @@ import static org.mockito.Mockito.when;
 class RecordManagerServiceImplTest {
 
     @Mock
-    private RecordManagerRepository mockRecordManagerRepository;
+    private ApiRepository mockRecordManagerRepository;
 
     @InjectMocks
-    private RecordManagerServiceImpl recordManagerServiceImpl;
+    private ApiServiceImpl recordManagerServiceImpl;
 
     @Test
     @DisplayName("Calls to RecordManagerRepository return all records, retrieves three unconstrained instances of class Album.")

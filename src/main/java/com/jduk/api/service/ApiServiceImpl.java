@@ -1,7 +1,7 @@
-package com.example.recordshopapiv2.service;
+package com.jduk.api.service;
 
-import com.example.recordshopapiv2.data.Album;
-import com.example.recordshopapiv2.repository.RecordManagerRepository;
+import com.jduk.api.data.Album;
+import com.jduk.api.repository.ApiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RecordManagerServiceImpl implements RecordManagerService {
+public class ApiServiceImpl implements ApiService {
 
     @Autowired
-    RecordManagerRepository recordManagerRepository;
+    ApiRepository recordManagerRepository;
 
     @Override
     public List<Album> getAllAlbums() {

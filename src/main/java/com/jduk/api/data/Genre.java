@@ -1,4 +1,4 @@
-package com.example.recordshopapiv2.data;
+package com.jduk.api.data;
 
 public enum Genre {
     ALTERNATIVE,

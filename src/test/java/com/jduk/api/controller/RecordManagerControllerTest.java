@@ -1,8 +1,8 @@
-package com.example.recordshopapiv2.controller;
+package com.jduk.api.controller;
 
-import com.example.recordshopapiv2.data.Album;
-import com.example.recordshopapiv2.data.Genre;
-import com.example.recordshopapiv2.service.RecordManagerServiceImpl;
+import com.jduk.api.data.Album;
+import com.jduk.api.data.Genre;
+import com.jduk.api.service.ApiServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,10 +33,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class RecordManagerControllerTest {
 
     @Mock
-    private RecordManagerServiceImpl mockRecordManagerServiceImpl;
+    private ApiServiceImpl mockRecordManagerServiceImpl;
 
     @InjectMocks
-    private RecordManagerController recordManagerController;
+    private ApiController recordManagerController;
 
     @Autowired
     private MockMvc mockMvcController;
@@ -93,5 +93,6 @@ class RecordManagerControllerTest {
         expectedAlbumList.add(album3);
         return expectedAlbumList;
     }
+
 
 }

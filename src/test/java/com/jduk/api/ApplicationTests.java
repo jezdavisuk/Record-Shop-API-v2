@@ -1,4 +1,4 @@
-package com.example.recordshopapiv2;
+package com.jduk.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
