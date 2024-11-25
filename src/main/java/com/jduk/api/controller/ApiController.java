@@ -31,6 +31,13 @@ public class ApiController {
         return new ResponseEntity<>(apiService.getAllAlbums(), HttpStatus.OK);
     }
 
+    // GET album by id
+    @Operation(summary = "Retrieve album information from database record by associated ID.")
+    @GetMapping("/{id}")
+    public ResponseEntity<Album> getAlbumByID(@PathVariable @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+        return new ResponseEntity<>(apiService.getAlbumByID(id), HttpStatus.OK);
+    }
+
 
 
 
