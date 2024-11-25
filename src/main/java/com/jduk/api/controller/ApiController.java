@@ -33,18 +33,18 @@ public class ApiController {
     // GET album by id
     @Operation(summary = "Retrieve album information from database record by associated ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Album> getAlbumByID(@PathVariable @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+    public ResponseEntity<Album> getAlbumByID(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
         return new ResponseEntity<>(apiService.getAlbumByID(id), HttpStatus.OK);
     }
 
     // DELETE album by id
     @Operation(summary = "Delete record of album from database by associated ID.")
     @GetMapping("/{id}")
-    public ResponseEntity<Album> deleteAlbumByID(@PathVariable @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+    public ResponseEntity<Album> deleteAlbumByID(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
         return new ResponseEntity<>(apiService.deleteAlbumByID(id), HttpStatus.OK);
     }
 
-    // POST event
+    // POST album
     @Operation(summary = "Create new record of type Album in database.")
     @PostMapping
     public ResponseEntity<Album> addAlbum(@RequestBody(description = "Album to be saved to database.") Album album) {
@@ -54,7 +54,13 @@ public class ApiController {
         return new ResponseEntity<>(newAlbum, httpHeaders, HttpStatus.CREATED);
     }
 
-
+    // UPDATE album
+    @Operation(summary = "Patch existing record on album with new and up-to-date information. Matched by ID requested.")
+    @PatchMapping("/{id}")
+    public ResponseEntity<Album> updateAlbumById(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id,
+                                                 @RequestBody(description = "Updated album on record with outdated fields changed.") Album album) {
+        return new ResponseEntity<>(apiService.updateAlbumById(id, album), HttpStatus.OK);
+    }
 
 
 }
