@@ -38,7 +38,12 @@ public class ApiController {
         return new ResponseEntity<>(apiService.getAlbumByID(id), HttpStatus.OK);
     }
 
-
+    // DELETE album by id
+    @Operation(summary = "Delete record of album from database by associated ID.")
+    @GetMapping("/{id}")
+    public ResponseEntity<Album> deleteAlbumByID(@PathVariable @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+        return new ResponseEntity<>(apiService.deleteAlbumByID(id), HttpStatus.OK);
+    }
 
 
 
