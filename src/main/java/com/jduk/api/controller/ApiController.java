@@ -62,5 +62,4 @@ public class ApiController {
         return new ResponseEntity<Album>(apiService.updateAlbumById(id, album), HttpStatus.OK);
     }
 
-
 }
