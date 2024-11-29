@@ -58,6 +58,21 @@ class ApiServiceImplTest {
         assertThat(apiServiceImpl.getAlbumById(3L)).isEqualTo(albumList.get(2));
     }
 
+    @Test
+    @DisplayName("Passes to apiRepository any one of three unconstrained instances of class Album and verifies that response entities match.")
+    public void testAddAlbum() throws Exception {
+
+        List<Album> albumList = getAlbumList();
+
+        when(mockApiRepository.save(albumList.get(0))).thenReturn(albumList.get(0));
+        when(mockApiRepository.save(albumList.get(1))).thenReturn(albumList.get(1));
+        when(mockApiRepository.save(albumList.get(2))).thenReturn(albumList.get(2));
+
+        assertThat(apiServiceImpl.addAlbum(albumList.get(0))).isEqualTo(albumList.get(0));
+        assertThat(apiServiceImpl.addAlbum(albumList.get(1))).isEqualTo(albumList.get(1));
+        assertThat(apiServiceImpl.addAlbum(albumList.get(2))).isEqualTo(albumList.get(2));
+    }
+
     private static List<Album> getAlbumList() {
         Album album1 = new Album(1L, "Total Life Forever", Genre.INDIE,
                 LocalDate.of(2010, Month.MAY, 10), false, null, null);
