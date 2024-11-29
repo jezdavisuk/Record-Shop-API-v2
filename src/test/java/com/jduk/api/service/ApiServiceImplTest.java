@@ -115,7 +115,20 @@ class ApiServiceImplTest {
         assertThat(apiServiceImpl.deleteAlbumById(1L)).isEqualTo("Album with id '1' has been successfully deleted.");
     }
 
+    @Test
+    @DisplayName("Calls on service method deleteAlbumById() where associated ID points to an empty record. This simulates absence of record post-deletion, and verifies that a NoResultFoundException is correctly thrown in response.")
+    public void testDeleteAlbumByIDExistingRecordAbsent() throws Exception {
 
+        // Arrange
+        List<Album> albumList = getAlbumList();
+
+        // Act
+        when(mockApiRepository.findById(2L)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(NoResultFoundException.class, () -> apiServiceImpl.deleteAlbumById(1L), "Exception not thrown, context unmocked.");
+        assertThrows(NoResultFoundException.class, () -> apiServiceImpl.deleteAlbumById(2L), "Exception not thrown, context mocked.");
+    }
 
     private static List<Album> getAlbumList() {
         Album album1 = new Album(1L, "Total Life Forever", Genre.INDIE,
