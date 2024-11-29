@@ -73,6 +73,24 @@ class ApiServiceImplTest {
         assertThat(apiServiceImpl.addAlbum(albumList.get(2))).isEqualTo(albumList.get(2));
     }
 
+    @Test
+    @DisplayName("Persists to apiRepository three unconstrained instances of class Album and calls service method updateAlbumById() on last entry. Verifies by response that associated record is updated with a separate new instance of type Album.")
+    public void testUpdateAlbumByID() throws Exception {
+
+        List<Album> albumList = getAlbumList();
+
+        mockApiRepository.save(albumList.get(0));
+        mockApiRepository.save(albumList.get(1));
+        mockApiRepository.save(albumList.get(2));
+
+        Album updatedAlbum = new Album(2L, "Curtis", Genre.SOUL, LocalDate.of(1970, Month.SEPTEMBER, 21), false, null, null);
+
+        when(mockApiRepository.findById(2L)).thenReturn(Optional.of(albumList.get(1)));
+        when(mockApiRepository.save(updatedAlbum)).thenReturn(updatedAlbum);
+
+        assertThat(apiServiceImpl.updateAlbumById(2L, updatedAlbum)).isEqualTo(updatedAlbum);
+    }
+
     private static List<Album> getAlbumList() {
         Album album1 = new Album(1L, "Total Life Forever", Genre.INDIE,
                 LocalDate.of(2010, Month.MAY, 10), false, null, null);
