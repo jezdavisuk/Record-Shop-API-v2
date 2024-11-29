@@ -1,6 +1,7 @@
 package com.jduk.api.service;
 
 import com.jduk.api.data.Album;
+import com.jduk.api.exception.NoResultFoundException;
 import com.jduk.api.repository.ApiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
