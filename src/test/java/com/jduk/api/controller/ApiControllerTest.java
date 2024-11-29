@@ -26,17 +26,18 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class RecordManagerControllerTest {
+class ApiControllerTest {
 
     @Mock
-    private ApiServiceImpl mockRecordManagerServiceImpl;
+    private ApiServiceImpl mockApiServiceImpl;
 
     @InjectMocks
-    private ApiController recordManagerController;
+    private ApiController apiController;
 
     @Autowired
     private MockMvc mockMvcController;
@@ -45,7 +46,7 @@ class RecordManagerControllerTest {
 
     @BeforeEach
     public void setup(){
-        mockMvcController = MockMvcBuilders.standaloneSetup(recordManagerController).build();
+        mockMvcController = MockMvcBuilders.standaloneSetup(apiController).build();
         mapper = new ObjectMapper();
     }
 
@@ -54,7 +55,7 @@ class RecordManagerControllerTest {
     public void testGetAllAlbumsReturnsAlbums() throws Exception {
 
         // Arrange
-        when(mockRecordManagerServiceImpl.getAllAlbums()).thenReturn(getAlbumList());
+        when(mockApiServiceImpl.getAllAlbums()).thenReturn(getAlbumList());
 
         // Act, Assert
         this.mockMvcController.perform(
