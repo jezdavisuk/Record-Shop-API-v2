@@ -34,6 +34,7 @@ public class ApiController {
     @Operation(summary = "Retrieve album information from database record by associated ID.")
     @GetMapping("/{id}")
     public ResponseEntity<Album> getAlbumByID(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+      
         return new ResponseEntity<Album>(apiService.getAlbumById(id), HttpStatus.OK);
     }
 
@@ -61,5 +62,5 @@ public class ApiController {
     public ResponseEntity<String> deleteAlbumById(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
         return new ResponseEntity<>(apiService.deleteAlbumById(id), HttpStatus.OK);
     }
-
+  
 }
