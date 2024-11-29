@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -40,6 +41,21 @@ class ApiServiceImplTest {
         assertThat(actualResult).hasSize(3);
         assertThat(actualResult).isEqualTo(getAlbumList());
 
+    }
+
+    @Test
+    @DisplayName("Calls to apiRepository to return one persisting unconstrained instance of class Album by its associated ID.")
+    public void testGetAlbumById() throws Exception {
+
+        List<Album> albumList = getAlbumList();
+
+        when(mockApiRepository.findById(1L)).thenReturn(Optional.ofNullable(albumList.get(0)));
+        when(mockApiRepository.findById(2L)).thenReturn(Optional.ofNullable(albumList.get(1)));
+        when(mockApiRepository.findById(3L)).thenReturn(Optional.ofNullable(albumList.get(2)));
+
+        assertThat(apiServiceImpl.getAlbumById(1L)).isEqualTo(albumList.get(0));
+        assertThat(apiServiceImpl.getAlbumById(2L)).isEqualTo(albumList.get(1));
+        assertThat(apiServiceImpl.getAlbumById(3L)).isEqualTo(albumList.get(2));
     }
 
     private static List<Album> getAlbumList() {
