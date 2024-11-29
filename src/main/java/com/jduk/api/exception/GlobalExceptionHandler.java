@@ -16,6 +16,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> managePropertyValueException(PropertyValueException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        String message = "Bad Request. Album must be assigned a name, genre, and release date, alongside an " +
+                "indication of whether it is age restricted, and the corresponding entries of type Artist and Stock.";
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 }
