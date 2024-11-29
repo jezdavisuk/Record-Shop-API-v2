@@ -25,7 +25,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Album getAlbumbyID(Long id) {
+    public Album getAlbumById(Long id) {
         Optional<Album> album = apiRepository.findById(id);
         if(album.isPresent()) {
             return album.get();
@@ -35,7 +35,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public String deleteAlbumByID(Long id) {
+    public String deleteAlbumById(Long id) {
         Optional<Album> album = apiRepository.findById(id);
         if(album.isPresent()) {
             apiRepository.deleteById(id);
@@ -51,7 +51,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public Album updateAlbumByID(Long id, Album album) {
+    public Album updateAlbumById(Long id, Album album) {
         Optional<Album> currentAlbum = apiRepository.findById(id);
         if(currentAlbum.isPresent()) {
             Album newAlbum = currentAlbum.get();

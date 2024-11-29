@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ApiService {
     List<Album> getAllAlbums();
-    Album getAlbumbyID(Long id);
-    String deleteAlbumByID(Long id);
+    Album getAlbumById(Long id);
+    String deleteAlbumById(Long id);
     Album addAlbum(Album album);
-    Album updateAlbumByID(Long id, Album album);
+    Album updateAlbumById(Long id, Album album);
 }
