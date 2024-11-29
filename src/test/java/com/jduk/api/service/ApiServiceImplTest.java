@@ -18,23 +18,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest
-class RecordManagerServiceImplTest {
+class ApiServiceImplTest {
 
     @Mock
-    private ApiRepository mockRecordManagerRepository;
+    private ApiRepository mockApiRepository;
 
     @InjectMocks
-    private ApiServiceImpl recordManagerServiceImpl;
+    private ApiServiceImpl apiServiceImpl;
 
     @Test
-    @DisplayName("Calls to RecordManagerRepository return all records, retrieves three unconstrained instances of class Album.")
+    @DisplayName("Calls to apiRepository to return three persisting unconstrained instances of class Album.")
     void testGetAllAlbumsReturnsListOfAlbums() {
 
         // Arrange
-        when(mockRecordManagerRepository.findAll()).thenReturn(getAlbumList());
+        when(mockApiRepository.findAll()).thenReturn(getAlbumList());
 
         // Act
-        List<Album> actualResult = recordManagerServiceImpl.getAllAlbums();
+        List<Album> actualResult = apiServiceImpl.getAllAlbums();
 
         // Assert
         assertThat(actualResult).hasSize(3);
