@@ -1,8 +1,6 @@
 package com.jduk.api.repository;
 
-import com.example.recordshopapiv2.data.*;
-import com.jduk.api.data.Album;
-import com.jduk.api.data.Genre;
+import com.jduk.api.data.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-public class RecordManagerRepositoryTest {
+public class ApiRepositoryTest {
 
     @Autowired
-    ApiRepository recordManagerRepository;
+    ApiRepository apiRepository;
 
     @Test
     @DisplayName("Writes to, and reads from, H2 in-memory database three unconstrained instances of class Album.")
@@ -29,13 +27,12 @@ public class RecordManagerRepositoryTest {
         List<Album> expectedAlbumList = getAlbumList();
 
         // Act
-        recordManagerRepository.saveAll(expectedAlbumList);
-        Iterable<Album> actualAlbumList = recordManagerRepository.findAll();
+        apiRepository.saveAll(expectedAlbumList);
+        Iterable<Album> actualAlbumList = apiRepository.findAll();
 
         // Assert
         assertThat(actualAlbumList).hasSize(3);
         assertThat(expectedAlbumList).isEqualTo(actualAlbumList);
-
     }
 
     private static List<Album> getAlbumList() {
