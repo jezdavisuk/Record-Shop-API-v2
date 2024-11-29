@@ -37,13 +37,6 @@ public class ApiController {
         return new ResponseEntity<Album>(apiService.getAlbumById(id), HttpStatus.OK);
     }
 
-    // DELETE album by id
-    @Operation(summary = "Delete record of album from database by associated ID.")
-    @GetMapping("/{id}")
-    public ResponseEntity<String> deleteAlbumById(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
-        return new ResponseEntity<>(apiService.deleteAlbumById(id), HttpStatus.OK);
-    }
-
     // POST album
     @Operation(summary = "Create new record of type Album in database.")
     @PostMapping
@@ -60,6 +53,13 @@ public class ApiController {
     public ResponseEntity<Album> updateAlbumById(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id,
                                                  @RequestBody(description = "Updated album on record with outdated fields changed.") Album album) {
         return new ResponseEntity<Album>(apiService.updateAlbumById(id, album), HttpStatus.OK);
+    }
+
+    // DELETE album by id
+    @Operation(summary = "Delete record of album from database by associated ID.")
+    @GetMapping("/{id}")
+    public ResponseEntity<String> deleteAlbumById(@PathVariable("id") @Parameter(name = "ID", description = "Unique ID associated with a particular album of choice.") Long id){
+        return new ResponseEntity<>(apiService.deleteAlbumById(id), HttpStatus.OK);
     }
 
 }

@@ -35,17 +35,6 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public String deleteAlbumById(Long id) {
-        Optional<Album> album = apiRepository.findById(id);
-        if(album.isPresent()) {
-            apiRepository.deleteById(id);
-            return String.format("Album with id '%s' has been deleted successfully.", id);
-        } else {
-            throw new NoResultFoundException(String.format("An event with id '%s' cannot be located.", id));
-        }
-    }
-
-    @Override
     public Album addAlbum(Album album) {
         return apiRepository.save(album);
     }
@@ -62,6 +51,17 @@ public class ApiServiceImpl implements ApiService {
             newAlbum.setArtist(album.getArtist());
             newAlbum.setStock(album.getStock());
             return apiRepository.save(newAlbum);
+        } else {
+            throw new NoResultFoundException(String.format("An album with id '%s' cannot be located.", id));
+        }
+    }
+
+    @Override
+    public String deleteAlbumById(Long id) {
+        Optional<Album> album = apiRepository.findById(id);
+        if(album.isPresent()) {
+            apiRepository.deleteById(id);
+            return String.format("Album with id '%s' has been successfully deleted.", id);
         } else {
             throw new NoResultFoundException(String.format("An album with id '%s' cannot be located.", id));
         }
