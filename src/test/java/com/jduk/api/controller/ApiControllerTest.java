@@ -1,5 +1,6 @@
 package com.jduk.api.controller;
 
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.jduk.api.data.Album;
 import com.jduk.api.data.Genre;
 import com.jduk.api.service.ApiServiceImpl;
@@ -23,10 +24,9 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
 @AutoConfigureMockMvc
@@ -48,6 +48,7 @@ class ApiControllerTest {
     public void setup(){
         mockMvcController = MockMvcBuilders.standaloneSetup(apiController).build();
         mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
     }
 
     @Test
@@ -83,12 +84,15 @@ class ApiControllerTest {
     @Test
     @DisplayName("Mocks GET request with integer path variable, and verifies JSON response attributes match expected values on each of three separate requests to three unconstrained instances of class Album.")
     void testGetAlbumById() throws Exception {
+
+        // Arrange
         List<Album> albumList = getAlbumList();
 
         when(mockApiServiceImpl.getAlbumById(1L)).thenReturn(albumList.get(0));
         when(mockApiServiceImpl.getAlbumById(2L)).thenReturn(albumList.get(1));
         when(mockApiServiceImpl.getAlbumById(3L)).thenReturn(albumList.get(2));
 
+        // Act, Assert
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/api/v1/records/1").accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -116,6 +120,63 @@ class ApiControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.releaseDate").value("11-09-2001"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.ageRestricted").value(true));
     }
+
+//    @Test
+//    @DisplayName("Mocks three POST requests to /records endpoint and verifies that JSON response attributes match across three separate requests concerning three instances of type Album.")
+//    void testAddAlbum() throws Exception {
+//
+//        // Arrange
+//        List<Album> albumList = getAlbumList();
+//
+//        when(mockApiServiceImpl.addAlbum(albumList.get(0))).thenReturn(albumList.get(0));
+//        when(mockApiServiceImpl.addAlbum(albumList.get(1))).thenReturn(albumList.get(1));
+//        when(mockApiServiceImpl.addAlbum(albumList.get(2))).thenReturn(albumList.get(2));
+//
+//        // Act, Assert
+//        this.mockMvcController.perform(
+//                        MockMvcRequestBuilders.post("/api/v1/records/")
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mapper.writeValueAsString(albumList.get(0))))
+//                .andDo(print());
+//
+//        this.mockMvcController.perform(
+//                        MockMvcRequestBuilders.post("/api/v1/records/")
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mapper.writeValueAsString(albumList.get(0))))
+//                .andDo(print())
+//                .andExpect(MockMvcResultMatchers.status().isCreated())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumId").value(1L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Total Life Forever"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.genre").value("INDIE"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.releaseDate").value("10-05-2010"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.ageRestricted").value(false));
+//
+//        this.mockMvcController.perform(
+//                        MockMvcRequestBuilders.post("/api/v1/records/")
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mapper.writeValueAsString(albumList.get(1))))
+//                .andExpect(MockMvcResultMatchers.status().isCreated())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumId").value(2L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("Seal"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.genre").value("RHYTHM_AND_BLUES"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.releaseDate").value("23-05-1994"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.ageRestricted").value(false));
+//
+//        this.mockMvcController.perform(
+//                        MockMvcRequestBuilders.post("/api/v1/records/")
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mapper.writeValueAsString(albumList.get(2))))
+//                .andExpect(MockMvcResultMatchers.status().isCreated())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumId").value(3L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.albumName").value("The Blueprint"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.genre").value("RAP"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.releaseDate").value("11-09-2001"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.ageRestricted").value(true));
+//
+//        verify(mockApiServiceImpl, times(1)).addAlbum(albumList.get(0));
+//        verify(mockApiServiceImpl, times(1)).addAlbum(albumList.get(1));
+//        verify(mockApiServiceImpl, times(1)).addAlbum(albumList.get(2));
+//    }
 
     private static List<Album> getAlbumList() {
         Album album1 = new Album(1L, "Total Life Forever", Genre.INDIE,
