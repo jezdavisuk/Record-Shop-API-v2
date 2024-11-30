@@ -22,20 +22,18 @@ public class Price implements Serializable {
     @Column(name = "ID")
     private Long priceId;
 
-    @Column(name="wholesale_price")
+    @Column(name="WHOLESALE_PRICE")
     BigDecimal wholesalePrice;
 
-    @Column(name="market_price")
+    @Column(name="MARKET_PRICE")
     BigDecimal marketPrice;
 
     @OneToOne(mappedBy = "price")
     private Stock stock;
 
-//    @JsonIgnore
 //    @Column(name="profit_margin")
 //    BigDecimal profitMargin = getProfitMargin();
 //
-//    @JsonIgnore
 //    BigDecimal getProfitMargin() {
 //        assert wholesalePrice != null;
 //        return wholesalePrice.subtract(marketPrice);
