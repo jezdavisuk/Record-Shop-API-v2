@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,36 +16,33 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "record")
-@Builder
-public class Album {
+@Table(name = "ALBUM")
+public class Album implements Serializable {
 
     @Id
-    @GeneratedValue
-    @Column(name ="album_id", updatable = false, nullable = false)
-    Long albumId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="ID", updatable = false, nullable = false)
+    private Long albumId;
 
-    @Column(name = "album_name", nullable = false)
-    String albumName;
+    @Column(name = "NAME", nullable = false, unique = true)
+    private String albumName;
 
-    @Column(name = "genre", nullable = false)
+    @Column(name = "GENRE", nullable = false)
     @Enumerated(EnumType.STRING)
-    Genre genre;
+    private Genre genre;
 
-    @Column(name = "release_date")
+    @Column(name = "RELEASE_DATE", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    LocalDate releaseDate;
+    private LocalDate releaseDate;
 
-    @Column(name = "age_restricted")
-    boolean ageRestricted;
+    @Column(name = "IS_AGE_RESTRICTED", nullable = false)
+    private boolean ageRestricted;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id")
-    Artist artist;
+    private Artist artist;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "stockId")
-    Set<Stock> stock = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ALBUM_ID")
+    private Set<Stock> stock;
 
 }
