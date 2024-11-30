@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,25 +15,22 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "artist")
-@Builder
-public class Artist {
+@Table(name = "ARTIST")
+public class Artist implements Serializable {
 
-    @Id // primary key
-    @GeneratedValue
-    @Column(name = "artist_id", updatable = false, nullable = false)
-    Long artistId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", updatable = false, nullable = false)
+    private Long artistId;
 
-    @Column(name = "artist_name")
+    @Column(name = "NAME")
     String artistName;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "artist")
-    Set<Album> albums = new HashSet<>();
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "signedBy")
-    Set<Stock> signedCopies = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "ARTIST_ALBUM",
+                joinColumns = {@JoinColumn(name = "ARTIST_ID", referencedColumnName = "ID")},
+                inverseJoinColumns = {@JoinColumn(name = "ALBUM_ID", referencedColumnName = "ID")})
+    private Set<Album> albums;
 
 
 }

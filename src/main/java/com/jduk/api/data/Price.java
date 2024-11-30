@@ -7,36 +7,33 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "price")
-@Builder
-public class Price {
+@Table(name = "PRICE")
+public class Price implements Serializable {
 
     @Id
-    @Column(name = "price_id")
-    Long priceId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Long priceId;
 
-    @Column(name="wholesale_price")
+    @Column(name="WHOLESALE_PRICE")
     BigDecimal wholesalePrice;
 
-    @Column(name="market_price")
+    @Column(name="MARKET_PRICE")
     BigDecimal marketPrice;
 
-    @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, optional = true)
-    @PrimaryKeyJoinColumn(name = "stock", referencedColumnName = "stock_id")
+    @OneToOne(mappedBy = "price")
     private Stock stock;
 
-//    @JsonIgnore
 //    @Column(name="profit_margin")
 //    BigDecimal profitMargin = getProfitMargin();
 //
-//    @JsonIgnore
 //    BigDecimal getProfitMargin() {
 //        assert wholesalePrice != null;
 //        return wholesalePrice.subtract(marketPrice);

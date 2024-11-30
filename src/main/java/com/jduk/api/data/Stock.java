@@ -3,9 +3,11 @@ package com.jduk.api.data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
+import java.io.Serializable;
 import java.util.Set;
 
 import java.time.LocalDateTime;
@@ -16,37 +18,26 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "stock")
-@Builder
-public class Stock {
+@Table(name = "STOCK")
+public class Stock implements Serializable {
 
     @Id
-    @GeneratedValue
-    @Column(name="stock_id")
-    Long stockId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID", updatable = false, nullable = false)
+    private Long stockId;
 
-    @Column(name="format")
+    @Column(name="FORMAT")
     @Enumerated(EnumType.STRING)
     Medium medium;
 
-    @Column(name="quantity_in_stock")
+    @Column(name="QUANTITY_IN_STOCK")
     int quantityInStock;
 
-    @Column(name="last_modified")
+    @Column(name="LAST_MODIFIED")
     LocalDateTime lastModified;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id")
-    Artist artist;
-
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "stock_id_to_artist_id",
-            joinColumns = @JoinColumn(name = "stock_id"),
-            inverseJoinColumns = @JoinColumn(name = "artist_id")
-    )
-    Set<Artist> signedBy;
+    @OneToOne
+    @JoinColumn(name = "PRICE_ID", referencedColumnName = "ID", nullable = false)
+    private Price price;
 
 }
