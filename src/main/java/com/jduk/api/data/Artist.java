@@ -23,7 +23,7 @@ public class Artist implements Serializable {
     @Column(name = "ID", updatable = false, nullable = false)
     private Long artistId;
 
-    @Column(name = "artist_name")
+    @Column(name = "NAME")
     String artistName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,9 +31,6 @@ public class Artist implements Serializable {
                 joinColumns = {@JoinColumn(name = "ARTIST_ID", referencedColumnName = "ID")},
                 inverseJoinColumns = {@JoinColumn(name = "ALBUM_ID", referencedColumnName = "ID")})
     private Set<Album> albums;
-
-//    @ManyToMany(mappedBy = "signedBy")
-//    Set<Stock> signedCopies = new HashSet<>();
 
 
 }
