@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,9 +16,9 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "record")
-@Builder
-public class Album {
+@Table(name = "Albums")
+@Embeddable
+public class Album implements Serializable {
 
     @Id
     @GeneratedValue
