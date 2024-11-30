@@ -24,19 +24,19 @@ public class Album implements Serializable {
     @Column(name ="ID", updatable = false, nullable = false)
     private Long albumId;
 
-    @Column(name = "album_name", nullable = false, unique = true)
-    String albumName;
+    @Column(name = "NAME", nullable = false, unique = true)
+    private String albumName;
 
-    @Column(name = "genre", nullable = false)
+    @Column(name = "GENRE", nullable = false)
     @Enumerated(EnumType.STRING)
-    Genre genre;
+    private Genre genre;
 
-    @Column(name = "release_date", nullable = false)
+    @Column(name = "RELEASE_DATE", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    LocalDate releaseDate;
+    private LocalDate releaseDate;
 
-    @Column(name = "is_age_restricted", nullable = false)
-    boolean ageRestricted;
+    @Column(name = "IS_AGE_RESTRICTED", nullable = false)
+    private boolean ageRestricted;
 
     @ManyToOne
     private Artist artist;
