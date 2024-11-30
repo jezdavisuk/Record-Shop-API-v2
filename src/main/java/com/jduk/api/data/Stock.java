@@ -26,31 +26,18 @@ public class Stock implements Serializable {
     @Column(name="ID", updatable = false, nullable = false)
     private Long stockId;
 
-    @Column(name="format")
+    @Column(name="FORMAT")
     @Enumerated(EnumType.STRING)
     Medium medium;
 
-    @Column(name="quantity_in_stock")
+    @Column(name="QUANTITY_IN_STOCK")
     int quantityInStock;
 
-    @Column(name="last_modified")
+    @Column(name="LAST_MODIFIED")
     LocalDateTime lastModified;
 
     @OneToOne
     @JoinColumn(name = "PRICE_ID", referencedColumnName = "ID", nullable = false)
     private Price price;
-
-//    @ManyToOne
-//    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id")
-//    Artist artist;
-
-//    @JsonIgnore
-//    @ManyToMany
-//    @JoinTable(
-//            name = "stock_id_to_artist_id",
-//            joinColumns = @JoinColumn(name = "stock_id"),
-//            inverseJoinColumns = @JoinColumn(name = "artist_id")
-//    )
-//    Set<Artist> signedBy;
 
 }
