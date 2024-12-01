@@ -1,14 +1,11 @@
 package com.jduk.api.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import java.time.LocalDateTime;
 
@@ -28,13 +25,13 @@ public class Stock implements Serializable {
 
     @Column(name="FORMAT")
     @Enumerated(EnumType.STRING)
-    Medium medium;
+    private Medium medium;
 
-    @Column(name="QUANTITY_IN_STOCK")
-    int quantityInStock;
+    @Column(name="QUANTITY_IN_STOCK", nullable = false)
+    private int quantityInStock;
 
     @Column(name="LAST_MODIFIED")
-    LocalDateTime lastModified;
+    private LocalDateTime lastModified;
 
     @OneToOne
     @JoinColumn(name = "PRICE_ID", referencedColumnName = "ID", nullable = false)
