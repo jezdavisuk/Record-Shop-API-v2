@@ -1,9 +1,7 @@
 package com.jduk.api.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,23 +17,24 @@ public class Price implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ID", updatable = false, nullable = false)
     private Long priceId;
 
     @Column(name="WHOLESALE_PRICE")
-    BigDecimal wholesalePrice;
+    private BigDecimal wholesalePrice;
 
     @Column(name="MARKET_PRICE")
-    BigDecimal marketPrice;
+    private BigDecimal marketPrice;
 
     @OneToOne(mappedBy = "price")
     private Stock stock;
 
-//    @Column(name="profit_margin")
-//    BigDecimal profitMargin = getProfitMargin();
-//
-//    BigDecimal getProfitMargin() {
-//        assert wholesalePrice != null;
-//        return wholesalePrice.subtract(marketPrice);
-//    }
+    @Transient
+    private BigDecimal profitMargin = getProfitMargin();
+
+    @Transient
+    private BigDecimal getProfitMargin() {
+        assert wholesalePrice != null;
+        return wholesalePrice.subtract(marketPrice);
+    }
 }
